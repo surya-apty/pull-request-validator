@@ -1,10 +1,17 @@
 version: v1
-branchType:
-  - feature
-  - bugfix
-  - enhancement
-ticketType:
-  - CB
-  - LSP
-shouldIncludeTicketNo: true
-ticketNoRegex: /\[\s(CB|LSP)-\d+\s\]/g
+branch:
+  branchType:
+    - feature
+    - bugfix
+    - enhancement
+  ticketType:
+    - CB
+    - LSP
+  shouldIncludeTicketNo: true
+  ticketIDRegex: /\[\s(CB|LSP)-\d+\s\]/g
+  regex: /\[\s(CB|LSP)-\d+\s\]/g
+
+
+  
+
+
