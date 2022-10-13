@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.runCommand = void 0;
 const child_process_1 = require("child_process");
 const runCommand = (command) => __awaiter(void 0, void 0, void 0, function* () {
     let result = {
@@ -32,10 +33,5 @@ const runCommand = (command) => __awaiter(void 0, void 0, void 0, function* () {
         });
     });
 });
-runCommand(`git rev-parse --abbrev-ref HEAD`)
-    .then((result) => {
-    console.log(result.stdout);
-    const branch = result.stdout;
-    const branchValidatorRegex = new RegExp(/\[\s(CB|LSP)-\d+\s\]/g);
-    console.log(branchValidatorRegex.test("[ LSP-24234 ] Fix: added custom validator"));
-});
+exports.runCommand = runCommand;
+//# sourceMappingURL=command.js.map
