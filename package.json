@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Pull request validator",
   "main": "build/index.js",
-  "type": "module",
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
