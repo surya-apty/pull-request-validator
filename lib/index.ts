@@ -1,23 +1,23 @@
 
-const { exec } = require('child_process');
+import { exec, ExecException } from 'child_process';
 
 interface CommandResult {
-    stderr: any;
-    stdout: any;
-    errorMessage: any;
+    stderr: string | Buffer;
+    stdout: string | Buffer;
+    error: ExecException | null;
 }
 
 const runCommand = async (command: string): Promise<CommandResult> => {
-    let result: any = {
-        stderr: null,
-        stdout: null,
-        errorMessage: null
+    let result: CommandResult = {
+        stderr: '',
+        stdout: '',
+        error: null
     };
     return new Promise((resolve, reject) => {
-        exec(command, (error: { message: any; }, stdout: any, stderr: any) => {
+        exec(command, (error, stdout, stderr) => {
             if (error) {
                 reject(error.message)
-                result.errorMessage = error.message;
+                result.error = new Error(error.message);
                 reject(result)
             }
             if (stderr) {

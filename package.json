@@ -21,6 +21,7 @@
   "author": "Surya",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^18.8.5",
     "chalk": "^5.1.2",
     "gh": "^2.8.9",
     "inquirer": "^9.1.3",
