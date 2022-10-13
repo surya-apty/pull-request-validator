@@ -2,9 +2,16 @@
   "name": "pull-request-validator",
   "version": "1.0.0",
   "description": "Pull request validator",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "start": "build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suryashekhawat/pull-request-validator"
   },
   "keywords": [
     "Pull",
@@ -18,5 +25,8 @@
     "gh": "^2.8.9",
     "inquirer": "^9.1.3",
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.8.4"
   }
 }
