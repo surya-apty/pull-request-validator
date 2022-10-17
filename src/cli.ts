@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 
 import { loadConfig, Rule, Rules } from "./config";
-import { createPullRequest } from "./git-commands";
+import { createNewBranch, createPullRequest } from "./git-commands";
 
 const prompts = require('prompts');
 
 const config = loadConfig('pull-request-validator-config.yaml');
 interface Response {
+  branchName: string;
+  ticketNo: string;
+  branchType: string;
   project: string;
   type: string;
   heading: string;
@@ -14,6 +17,27 @@ interface Response {
   additionalComments: string;
 }
 const questions = [
+  {
+    type: 'text',
+    name: 'ticketNo',
+    message: 'Enter your jira ticket no',
+    initial: 'LSP-XXXX'
+  },
+  {
+    type: 'select',
+    name: 'branchType',
+    message: 'Select your branch type',
+    choices: ['feature', 'bugfix', 'enhancement'].map((value) => {
+      return { title: value, value }
+    }),
+    initial: 1
+  },
+  {
+    type: 'text',
+    name: 'branchName',
+    message: 'Enter your branch name',
+    initial: 'login-button-update'
+  },
   {
     type: 'select',
     name: 'project',
@@ -26,7 +50,7 @@ const questions = [
   {
     type: 'select',
     name: 'type',
-    message: 'Pick a type?',
+    message: 'What kind of fix your pull request includes?',
     choices: ['fix', 'build', 'ci', 'pref'].map((value) => {
       return { title: value, value }
     }),
@@ -79,12 +103,14 @@ const questions = [
   ${response.type}
 
   This is a auto generated pull request, for more information [check docs here](https://github.com/suryashekhawat/pull-request-validator).
-  `  
-  createPullRequest(prHeading, prBody)
-  .then((result) => {
-    console.log(`Done`, result);
-    
-  }).catch(error => console.error(error));
-  
-  // => response => { username, age, about }
+  `;
+  createNewBranch(response.branchType, response.ticketNo, response.branchName)
+    .then((res) => {
+      console.log('done branch');
+      
+    }).catch(error => console.error(error));
+  createPullRequest(prHeading, prBody, [...config.branch.reviewer])
+    .then((result) => {
+      console.log(`Done`, result);
+    }).catch(error => console.error(error));
 })();

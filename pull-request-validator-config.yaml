@@ -1,5 +1,9 @@
 version: v1
 branch:
+  base: feature/LSP-12345/some-feature-branch
+  reviewer:
+   - surya-apty
+   - soni
   projects:
     - admin
     - player

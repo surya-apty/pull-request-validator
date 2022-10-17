@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPullRequest = exports.getAuthUsingToken = exports.getLocalBranch = void 0;
+exports.createNewBranch = exports.createPullRequest = exports.getAuthUsingToken = exports.getLocalBranch = void 0;
 var command_1 = require("./command");
 var getLocalBranch = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -50,9 +50,15 @@ var getAuthUsingToken = function (tokenFilePath) { return __awaiter(void 0, void
     });
 }); };
 exports.getAuthUsingToken = getAuthUsingToken;
-var createPullRequest = function (heading, body) { return __awaiter(void 0, void 0, void 0, function () {
+var createPullRequest = function (heading, body, reviewer) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/, (0, command_1.runCommand)("gh pr create --title \"".concat(heading, "\" --body \"").concat(body, "\""))];
+        return [2 /*return*/, (0, command_1.runCommand)("gh pr create --title \"".concat(heading, "\" --body \"").concat(body, "\" --reviewer ").concat(reviewer.join(',')))];
     });
 }); };
 exports.createPullRequest = createPullRequest;
+var createNewBranch = function (type, ticket, title) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, (0, command_1.runCommand)("git checkout -b ".concat(type, "/").concat(ticket, "/").concat(title))];
+    });
+}); };
+exports.createNewBranch = createNewBranch;

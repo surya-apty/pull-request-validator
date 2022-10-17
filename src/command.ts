@@ -7,6 +7,8 @@ export interface CommandResult {
 }
 
 export const runCommand = async (command: string): Promise<CommandResult> => {
+    console.log(`run: ${command}`);
+    
     let result: CommandResult = {
         stderr: '',
         stdout: '',

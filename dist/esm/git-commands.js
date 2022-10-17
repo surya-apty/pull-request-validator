@@ -45,8 +45,13 @@ export var getAuthUsingToken = function (tokenFilePath) { return __awaiter(void 
         return [2 /*return*/, runCommand("gh auth login --with-token < ".concat(tokenFilePath))];
     });
 }); };
-export var createPullRequest = function (heading, body) { return __awaiter(void 0, void 0, void 0, function () {
+export var createPullRequest = function (heading, body, reviewer) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/, runCommand("gh pr create --title \"".concat(heading, "\" --body \"").concat(body, "\""))];
+        return [2 /*return*/, runCommand("gh pr create --title \"".concat(heading, "\" --body \"").concat(body, "\" --reviewer ").concat(reviewer.join(',')))];
+    });
+}); };
+export var createNewBranch = function (type, ticket, title) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, runCommand("git checkout -b ".concat(type, "/").concat(ticket, "/").concat(title))];
     });
 }); };
