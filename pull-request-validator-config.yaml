@@ -1,15 +1,24 @@
 version: v1
 branch:
-  branchType:
-    - feature
-    - bugfix
-    - enhancement
-  ticketType:
-    - CB
-    - LSP
-  shouldIncludeTicketNo: true
-  ticketIDRegex: /\[\s(CB|LSP)-\d+\s\]/g
-  regex: /\[\s(CB|LSP)-\d+\s\]/g
+  projects:
+    - admin
+    - player
+  owners:
+    admin: surya-apty 
+    player: soni
+  meta:
+    maxLength: 100
+  rules:
+    branchType:
+      name: 'Should define type of branch'
+      regex: /^(feature|bugfix|enhancement)\/&/g
+    includeTicketNo:
+      name: 'Should include ticket no'
+      regex: /\[\s(CB|LSP)-\d+\s\]/g
+
+  
+  
+  
 
 
   
