@@ -14,6 +14,8 @@ export interface Config {
     version: string;
     branch: {
         projects: string[];
+        ticketRegex: RegExp;
+        shouldIncludeTicketNo: boolean;
         featureOwners: {
             [key: string]: string;
         },

@@ -1,4 +1,6 @@
 version: v1
+auth:
+  token: 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
 branch:
   projects:
     - admin
@@ -7,11 +9,10 @@ branch:
     admin: surya-apty 
     player: soni
   meta:
-    maxLength: 100
-  rules:
-    - 
-      name: 'Should include ticket no'
-      regex: /\[\s(CB|LSP)-\d+\s\]/g
+    maxLength: 150
+    shouldIncludeTicketNo: true
+    ticketRegex: /\[\s(CB|LSP)-\d+\s\]/g
+
 
   
   
