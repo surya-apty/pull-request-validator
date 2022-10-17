@@ -1,6 +1,4 @@
 version: v1
-auth:
-  token: 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
 branch:
   projects:
     - admin
