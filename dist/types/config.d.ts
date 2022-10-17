@@ -1,13 +1,14 @@
-interface Rule {
+export interface Rule {
     name: string;
-    regex: string;
+    regex: RegExp;
 }
-declare type Rules = {
+export declare type Rules = {
     [key: string]: Rule;
 };
 export interface Config {
     version: string;
     branch: {
+        projects: string[];
         featureOwners: {
             [key: string]: string;
         };
@@ -18,4 +19,3 @@ export interface Config {
     };
 }
 export declare const loadConfig: (path: string) => Config;
-export {};

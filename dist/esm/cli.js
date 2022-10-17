@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,12 +35,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { loadConfig } from "./config";
 var prompts = require('prompts');
+var config = loadConfig('pull-request-validator-config.yaml');
+console.log(config);
 var questions = [
     {
+        type: 'select',
+        name: 'project',
+        message: 'Pick a project?',
+        choices: config.branch.projects.map(function (project) {
+            return { title: project, value: project };
+        }),
+        initial: 1
+    },
+    {
+        type: 'select',
+        name: 'type',
+        message: 'Pick a type?',
+        choices: ['fix', 'build', 'ci', 'pref'].map(function (value) {
+            return { title: value, value: value };
+        }),
+        initial: 1
+    },
+    {
         type: 'text',
-        name: 'username',
-        message: 'What is your GitHub username?'
+        name: 'heading',
+        message: 'Enter your pull request heading',
+        validate: function (heading) {
+            var rules = config.branch.rules;
+            rules.forEach(function (value, index) {
+                var rule = value;
+                var regex = new RegExp(rule.regex);
+                console.log(regex.test(heading), rule.regex);
+                return regex.test(heading) ? true : "".concat(rule.name);
+            });
+        }
     },
     {
         type: 'number',

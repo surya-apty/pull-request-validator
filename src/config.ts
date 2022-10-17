@@ -1,18 +1,19 @@
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
 
-interface Rule {
+export interface Rule {
     name: string;
-    regex: string;
+    regex: RegExp;
 }
 
-type Rules = {
+export type Rules = {
     [key: string]: Rule
 }
 
 export interface Config {
     version: string;
     branch: {
+        projects: string[];
         featureOwners: {
             [key: string]: string;
         },
