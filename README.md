@@ -45,3 +45,4 @@ npm link
 ```sh
 npm run package
 ```
+<img width="1280" alt="Screenshot 1944-07-25 at 5 02 52 PM" src="https://user-images.githubusercontent.com/85492089/196166795-ff88db1c-7cbf-41ea-b0a7-d1ae86206736.png">
