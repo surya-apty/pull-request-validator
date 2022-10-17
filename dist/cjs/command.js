@@ -41,6 +41,7 @@ var child_process_1 = require("child_process");
 var runCommand = function (command) { return __awaiter(void 0, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
+        console.log("run: ".concat(command));
         result = {
             stderr: '',
             stdout: '',

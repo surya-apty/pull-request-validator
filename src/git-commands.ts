@@ -8,8 +8,8 @@ export const getAuthUsingToken = async (tokenFilePath: string) => {
     return runCommand(`gh auth login --with-token < ${tokenFilePath}`);
 }
 
-export const createPullRequest = async (heading: string, body: string) => {
-    return runCommand(`gh pr create --title "${heading}" --body "${body}"`);
+export const createPullRequest = async (heading: string, body: string, reviewer: string[]) => {
+    return runCommand(`gh pr create --title "${heading}" --body "${body}" --reviewer ${reviewer.join(',')}`);
 }
 
 export const createNewBranch = async (type: string, ticket: string, title: string) => {

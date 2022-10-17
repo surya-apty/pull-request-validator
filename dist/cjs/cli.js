@@ -36,12 +36,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var config_1 = require("./config");
 var git_commands_1 = require("./git-commands");
 var prompts = require('prompts');
 var config = (0, config_1.loadConfig)('pull-request-validator-config.yaml');
 var questions = [
+    {
+        type: 'text',
+        name: 'ticketNo',
+        message: 'Enter your jira ticket no',
+        initial: 'LSP-XXXX'
+    },
+    {
+        type: 'select',
+        name: 'branchType',
+        message: 'Select your branch type',
+        choices: ['feature', 'bugfix', 'enhancement'].map(function (value) {
+            return { title: value, value: value };
+        }),
+        initial: 1
+    },
+    {
+        type: 'text',
+        name: 'branchName',
+        message: 'Enter your branch name',
+        initial: 'login-button-update'
+    },
     {
         type: 'select',
         name: 'project',
@@ -54,7 +84,7 @@ var questions = [
     {
         type: 'select',
         name: 'type',
-        message: 'Pick a type?',
+        message: 'What kind of fix your pull request includes?',
         choices: ['fix', 'build', 'ci', 'pref'].map(function (value) {
             return { title: value, value: value };
         }),
@@ -98,7 +128,11 @@ var questions = [
                 response = _a.sent();
                 prHeading = response.heading;
                 prBody = "\n  # ROOT Cause:\n  ".concat(response.rootCause, "\n\n  # Additional Message:\n  ").concat(response.additionalComments, "\n\n  # Project:\n  ").concat(response.project, "\n\n  # Pull Request For:\n  ").concat(response.type, "\n\n  This is a auto generated pull request, for more information [check docs here](https://github.com/suryashekhawat/pull-request-validator).\n  ");
-                (0, git_commands_1.createPullRequest)(prHeading, prBody)
+                (0, git_commands_1.createNewBranch)(response.branchType, response.ticketNo, response.branchName)
+                    .then(function (res) {
+                    console.log('done branch');
+                }).catch(function (error) { return console.error(error); });
+                (0, git_commands_1.createPullRequest)(prHeading, prBody, __spreadArray([], config.branch.reviewer, true))
                     .then(function (result) {
                     console.log("Done", result);
                 }).catch(function (error) { return console.error(error); });

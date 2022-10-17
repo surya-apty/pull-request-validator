@@ -13,6 +13,8 @@ export type Rules = {
 export interface Config {
     version: string;
     branch: {
+        base: string;
+        reviewer: string[];
         projects: string[];
         ticketRegex: RegExp;
         shouldIncludeTicketNo: boolean;

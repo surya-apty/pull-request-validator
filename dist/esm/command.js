@@ -38,6 +38,7 @@ import { exec } from "child_process";
 export var runCommand = function (command) { return __awaiter(void 0, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
+        console.log("run: ".concat(command));
         result = {
             stderr: '',
             stdout: '',
