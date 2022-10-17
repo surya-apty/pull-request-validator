@@ -5,6 +5,10 @@ validate your pull request with custom rule using yaml config file.
 ```yaml
 version: v1
 branch:
+  base: feature/LSP-12345/some-feature-branch
+  reviewer:
+   - surya-apty
+   - soni
   projects:
     - admin
     - player
@@ -12,11 +16,9 @@ branch:
     admin: surya-apty 
     player: soni
   meta:
-    maxLength: 100
-  rules:
-    - 
-      name: 'Should include ticket no'
-      regex: /\[\s(CB|LSP)-\d+\s\]/g
+    maxLength: 150
+    shouldIncludeTicketNo: true
+    ticketRegex: /\[\s(CB|LSP)-\d+\s\]/g
 ```
 
 For example you could include a rule like pull request heading should contain ticket no using a regex expression in the configuration file as shown above.
