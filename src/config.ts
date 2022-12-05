@@ -1,15 +1,5 @@
 import * as yaml from 'js-yaml';
 import * as fs from 'fs';
-
-export interface Rule {
-    name: string;
-    regex: RegExp;
-}
-
-export type Rules = {
-    [key: string]: Rule
-}
-
 export interface Config {
     version: string;
     branch: {
@@ -24,7 +14,6 @@ export interface Config {
         meta: {
             maxLength: number;
         },
-        rules: Rules[]
     }
 }
 export const loadConfig = (path: string): Config => {
